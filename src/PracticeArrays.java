@@ -1,33 +1,31 @@
 import java.util.Scanner;
 
-import PracticeArrays.TwoGenericObjects;
-
 public class PracticeArrays {
 	public static void main(String[] args) {
 		int size = 0;
-		Scanner scanner = new Scanner(System.in);
-		 System.out.print("Enter the size of the array :");
-		 size = scanner.nextInt();
+		final Scanner scanner = new Scanner(System.in);
+		System.out.print("Enter the size of the array :");
+		size = scanner.nextInt();
 
 		// Dynamic memory allocation
-		int[] array = new int[size];
-		//{ 58, 24, 13, 15, 63, 9, 8, 81, 1, 78 };
-
-		 int[] reverseArray = new int[size];
-		 readElements(size, scanner, array);
-		 printArray(array);
-		 findElementInArray(scanner, array);
-		 typesOfNumbers(array);
-		 copyInReverseOrder(array, reverseArray);
-		 sumOfArray(array);
-		 productofArray(array);
-		 //two Dimensional Array
-		 int[][] twoDimArray = readElementsTwoDimension(scanner);
-		 printTwoDimArray(twoDimArray);
-		 // array is populated using call by reference
-		 readElements(size, scanner, array);
-		 //largestAndSmallestElementOfAnArray(array);
-		 isArrayPalindrome(array);
+		final int[] array = new int[size];
+		// { 58, 24, 13, 15, 63, 9, 8, 81, 1, 78 };
+		readElements(size, scanner, array);
+		printArray(array);
+		System.out.println("Enter the number to be searched in Array :");
+		int elementToFind = scanner.nextInt();
+		findElementInArray(elementToFind, array);
+		typesOfNumbers(array);
+		copyInReverseOrder(array);
+		sumOfArray(array);
+		productofArray(array);
+		// two Dimensional Array
+		final int[][] twoDimArray = readElementsTwoDimension(scanner);
+		printTwoDimArray(twoDimArray);
+		// array is populated using call by reference
+		readElements(size, scanner, array);
+		// largestAndSmallestElementOfAnArray(array);
+		isArrayPalindrome(array);
 
 		// splitArrayIntoTwo(array);
 		minMaxDifferenceInArray(array);
@@ -40,8 +38,9 @@ public class PracticeArrays {
 	 * 
 	 */
 
-	private static TwoGenericObjects<Integer,Integer> minMaxDifferenceInArray(int[] array) {
+	static TwoGenericObjects<Integer, Integer> minMaxDifferenceInArray(int[] array) {
 		// int[] array1 = { 28, 9, 10, 45, 1, 82, 24, 18 };
+		Integer maxDiff, minDiff;
 		for (int i = 0; i < array.length; i++) {
 			for (int j = i + 1; j < array.length; j++) {
 				if (array[i] < array[j]) {
@@ -53,24 +52,41 @@ public class PracticeArrays {
 				}
 			}
 		}
-		for (int i = 0; i < array.length; i++) {
-			System.out.println(array[i]);
+		printArray(array);
+		if (array.length >= 3) {
+			maxDiff = array[0] - array[array.length - 1];
+			minDiff = array[array.length - 2] - array[array.length - 1];
+
+		} else if (array.length == 2) {
+			maxDiff = array[0] - array[array.length - 1];
+			minDiff = maxDiff;
+		} else {
+			maxDiff = 0;
+			minDiff = 0;
 		}
-		Integer maxDiff = array[0] - array[array.length - 1];
-		Integer minDiff = array[array.length - 2] - array[array.length - 1];
+
 		return new TwoGenericObjects<Integer, Integer>(maxDiff, minDiff);
 	}
 
-	static class TwoGenericObjects<FIRST,SECOND>{
-		FIRST first;
-		SECOND second;
-		public TwoGenericObjects(FIRST first,SECOND second) {
-			this.first=first;
-			this.second=second;
+	static class TwoGenericObjects<FIRST, SECOND> {
+		private final FIRST first;
+		private final SECOND second;
+
+		public TwoGenericObjects(FIRST first, SECOND second) {
+			this.first = first;
+			this.second = second;
+		}
+
+		public FIRST getFirst() {
+			return first;
+		}
+
+		public SECOND getSecond() {
+			return second;
 		}
 	}
 
-	static TwoGenericObjects<Integer[],Integer[]> splitArrayIntoTwo(int[] array) {
+	static TwoGenericObjects<Integer[], Integer[]> splitArrayIntoTwo(final int[] array) {
 		int leftArraySize = 0, rightArraySize = 0;
 		if (array.length % 2 == 0) {
 			leftArraySize = array.length / 2;
@@ -79,19 +95,18 @@ public class PracticeArrays {
 			leftArraySize = array.length / 2 + 1;
 			rightArraySize = array.length / 2;
 		}
-		Integer[] splitArray1 = new Integer[leftArraySize];
-		Integer[] splitArray2 = new Integer[rightArraySize];
+		final Integer[] splitArray1 = new Integer[leftArraySize];
+		final Integer[] splitArray2 = new Integer[rightArraySize];
 		for (int i = 0; i < leftArraySize; i++) {
 			splitArray1[i] = array[i];
 		}
 		for (int i = 0, j = leftArraySize; j < array.length; i++, j++) {
 			splitArray2[i] = array[j];
 		}
-		TwoGenericObjects<Integer[],Integer[]> twoGenericObjects = new TwoGenericObjects<>(splitArray1, splitArray2);
-		return twoGenericObjects;
+		return new TwoGenericObjects<>(splitArray1, splitArray2);
 	}
 
-	static boolean isArrayPalindrome(int[] array) {
+	static boolean isArrayPalindrome(final int[] array) {
 		int size = array.length - 1;
 		boolean isPalindrome = true;
 		for (int i = 0; i < array.length / 2; i++) {
@@ -103,8 +118,8 @@ public class PracticeArrays {
 		return isPalindrome;
 	}
 
-	private static void largestAndSmallestElementOfAnArray(int[] array) {
-		int largest = Integer.MIN_VALUE, smallest = Integer.MAX_VALUE;
+	static TwoGenericObjects<Integer, Integer> largestAndSmallestElementOfAnArray(final int[] array) {
+		Integer largest = Integer.MIN_VALUE, smallest = Integer.MAX_VALUE;
 		for (int i = 0; i < array.length; i++) {
 			if (array[i] > largest) {
 				largest = array[i];
@@ -114,7 +129,7 @@ public class PracticeArrays {
 			}
 
 		}
-		System.out.println("The Largest element is : " + largest + " and smallest element is : " + smallest);
+		return new TwoGenericObjects<Integer, Integer>(largest, smallest);
 	}
 
 	private static void printTwoDimArray(int[][] twoDimArray) {
@@ -172,7 +187,7 @@ public class PracticeArrays {
 	}
 
 	private static void printArray(int[] array) {
-		System.out.print("The Elements in the Array are : [");
+		System.out.print("[");
 		for (int i = 0; i < array.length - 1; i++) {
 			System.out.print(array[i] + ",");
 		}
@@ -181,18 +196,14 @@ public class PracticeArrays {
 		System.out.println("]");
 	}
 
-	private static void findElementInArray(Scanner sc, int[] array) {
-		int elementToFind = 0;
-		System.out.println("Enter the number to be searched in Array :");
-		elementToFind = sc.nextInt();
+	static boolean findElementInArray(int elementToFind, int[] array) {
 		for (int i = 0; i < array.length; i++) {
 			if (elementToFind == array[i]) {
-				System.out.println("Element Found");
 				// when the goal of the function is achieved just use RETURN to say its done
-				return;
+				return true;
 			}
 		}
-		System.out.println("Element not found");
+		return false;
 
 	}
 
@@ -219,12 +230,13 @@ public class PracticeArrays {
 		System.out.println("Zeros :" + zero);
 	}
 
-	private static void copyInReverseOrder(int[] array, int[] reverseArray) {
+	static int[] copyInReverseOrder(int[] array) {
 		int size = array.length - 1;
+		final int[] reverseArray = new int[array.length];
 		for (int i = 0; i < array.length; i++) {
 			// Post decrement operator
 			reverseArray[i] = array[size--];
 		}
-		printArray(reverseArray);
+		return reverseArray;
 	}
 }
