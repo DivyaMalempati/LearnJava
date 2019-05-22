@@ -80,7 +80,14 @@ class PracticeArraysTest {
 		assertArrayEquals(new int[] {}, PracticeArrays.copyInReverseOrder(new int[] {}));
 		assertArrayEquals(new int[] { 1 }, PracticeArrays.copyInReverseOrder(new int[] { 1 }));
 		assertArrayEquals(new int[] { 2, 1 }, PracticeArrays.copyInReverseOrder(new int[] { 1, 2 }));
-
 	}
+	
+	@Test
+	void extractSubArrayTest() {
+		assertArrayEquals(new int[] {1}, PracticeArrays.extractSubArray(0,0,new int[] {1}));
+		assertArrayEquals(new int[] {30, 25, 40, 32}, PracticeArrays.extractSubArray(6,3,new int[] {10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60}));
+		assertArrayEquals(new int[] {30, 25, 40, 32, 31, 35}, PracticeArrays.extractSubArray(3,8,new int[] {10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60}));
+	}
+	
 
 }

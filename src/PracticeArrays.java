@@ -29,7 +29,28 @@ public class PracticeArrays {
 
 		// splitArrayIntoTwo(array);
 		minMaxDifferenceInArray(array);
+		// subArray From Main Array
+		int startIndex, endIndex;
+		startIndex = scanner.nextInt();
+		endIndex = scanner.nextInt();
+		int[] newArray = new int[] { 10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60 };
+		extractSubArray(startIndex, endIndex, newArray);
 		scanner.close();
+	}
+
+	static int[] extractSubArray(int startIndex, int endIndex, int[] array) {
+		if (startIndex > endIndex) {
+			int temp = startIndex;
+			startIndex = endIndex;
+			endIndex = temp;
+		}
+		int size = endIndex - startIndex + 1;
+		System.out.println(size);
+		int[] subArray = new int[size];
+		for (int i = 0; i < size; i++) {
+			subArray[i] = array[startIndex++];
+		}
+		return subArray;
 	}
 
 	/*
@@ -47,8 +68,6 @@ public class PracticeArrays {
 					int temp = array[j];
 					array[j] = array[i];
 					array[i] = temp;
-					// System.out.println(" Max : " + array1[j] + " Min :" + array1[i] + " Temp" +
-					// temp);
 				}
 			}
 		}
@@ -132,8 +151,8 @@ public class PracticeArrays {
 		return new TwoGenericObjects<Integer, Integer>(largest, smallest);
 	}
 
-	private static void printTwoDimArray(int[][] twoDimArray) {
-		System.out.println("The Elements in Two Dimensional Array are :");
+
+	static void printTwoDimArray(int[][] twoDimArray) {
 		System.out.println("{");
 		for (int i = 0; i < twoDimArray.length; i++) {
 			System.out.print("[");
@@ -148,7 +167,7 @@ public class PracticeArrays {
 		System.out.print("}");
 	}
 
-	private static int[][] readElementsTwoDimension(Scanner sc) {
+	static int[][] readElementsTwoDimension(Scanner sc) {
 		int rowSize, columnSize;
 		System.out.println("Enter Row Size : ");
 		rowSize = sc.nextInt();
@@ -179,11 +198,12 @@ public class PracticeArrays {
 		System.out.println("The sum of the Array : " + sum);
 	}
 
-	private static void readElements(int size, Scanner sc, int[] array) {
+	private static int[] readElements(int size, Scanner sc, int[] array) {
 		System.out.println("Enter the elements : ");
 		for (int i = 0; i < size; i++) {
 			array[i] = sc.nextInt();
 		}
+		return array;
 	}
 
 	private static void printArray(int[] array) {
