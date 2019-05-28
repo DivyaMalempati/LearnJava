@@ -20,7 +20,7 @@ public class PracticeArrays {
 		sumOfArray(array);
 		productofArray(array);
 		// two Dimensional Array
-		final int[][] twoDimArray = readElementsTwoDimension(scanner);
+		final int[][] twoDimArray = readElementsTwoDimension();
 		printTwoDimArray(twoDimArray);
 		// array is populated using call by reference
 		readElements(size, scanner, array);
@@ -151,7 +151,6 @@ public class PracticeArrays {
 		return new TwoGenericObjects<Integer, Integer>(largest, smallest);
 	}
 
-
 	static void printTwoDimArray(int[][] twoDimArray) {
 		System.out.println("{");
 		for (int i = 0; i < twoDimArray.length; i++) {
@@ -167,18 +166,20 @@ public class PracticeArrays {
 		System.out.print("}");
 	}
 
-	static int[][] readElementsTwoDimension(Scanner sc) {
+	static int[][] readElementsTwoDimension() {
 		int rowSize, columnSize;
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter Row Size : ");
-		rowSize = sc.nextInt();
+		rowSize = scanner.nextInt();
 		System.out.println("Enter column Size : ");
-		columnSize = sc.nextInt();
+		columnSize = scanner.nextInt();
 		int[][] twoDimArray = new int[rowSize][columnSize];
 		for (int i = 0; i < rowSize; i++) {
 			for (int j = 0; j < columnSize; j++) {
-				twoDimArray[i][j] = sc.nextInt();
+				twoDimArray[i][j] = scanner.nextInt();
 			}
 		}
+		scanner.close();
 		return twoDimArray;
 	}
 
