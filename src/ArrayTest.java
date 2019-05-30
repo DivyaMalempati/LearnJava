@@ -51,8 +51,29 @@ public class ArrayTest {
 		}
 		return array;
 	}
+
 	@Test
-	public void setTest() {
-		
+	public void lastIndexOfTest() {
+		Array array = getArray(10);
+		array.add(5);
+		array.add(3);
+		assertEquals(0, array.lastIndexOf(0));
+		assertEquals(1, array.lastIndexOf(1));
+		assertEquals(11, array.lastIndexOf(3));
+		assertEquals(-1, array.lastIndexOf(20));
+		assertEquals(-1, array.lastIndexOf(-1));
+	}
+
+	@Test
+	public void removeTest() {
+		Array array = getArray(10);
+		assertEquals(3, array.remove(3).intValue());
+		assertEquals(4, array.remove(3).intValue());
+		assertEquals(5, array.remove(3).intValue());
+		assertEquals(6, array.remove(3).intValue());
+		assertEquals(7, array.remove(3).intValue());
+		array.add(10);
+		assertEquals(8, array.remove(3).intValue());
+
 	}
 }

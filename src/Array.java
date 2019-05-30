@@ -25,6 +25,10 @@ public class Array implements List<Integer> {
 		return true;
 	}
 
+	public int arrayLength() {
+		return array.length;
+	}
+
 	private void doubleArraySize() {
 		int[] newArray = new int[array.length * 2];
 		for (int index = 0; index < numberOfElementsInArray; index++) {
@@ -73,7 +77,7 @@ public class Array implements List<Integer> {
 
 	@Override
 	public boolean contains(Object arg0) {
-		if(indexOf(arg0)>=0) {
+		if (indexOf(arg0) >= 0) {
 			return true;
 		}
 		return false;
@@ -114,7 +118,12 @@ public class Array implements List<Integer> {
 	@Override
 	public int lastIndexOf(Object arg0) {
 		// TODO Auto-generated method stub
-		return 0;
+		for (int i = size() - 1; i >= 0; i--) {
+			if (arg0.equals(array[i])) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
@@ -131,14 +140,34 @@ public class Array implements List<Integer> {
 
 	@Override
 	public boolean remove(Object arg0) {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	public Integer remove(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer removedElement = 0;
+		if (arg0 < 0 || arg0 >= numberOfElementsInArray) {
+			throw new ArrayIndexOutOfBoundsException(arg0);
+		} else if (arg0 < numberOfElementsInArray) {
+			removedElement = array[arg0];
+			for (int index = arg0; index < numberOfElementsInArray - 1; index++) {
+				array[index] = array[index + 1];
+			}
+			numberOfElementsInArray--;
+			if (numberOfElementsInArray <= array.length / 2) {
+				halfTheArraySize();
+			}
+		}
+		return removedElement;
+	}
+
+	private void halfTheArraySize() {
+		int[] newArray = new int[array.length / 2];
+		for (int index = 0; index < numberOfElementsInArray; index++) {
+			newArray[index] = array[index];
+		}
+		array = newArray;
 	}
 
 	@Override
@@ -156,10 +185,10 @@ public class Array implements List<Integer> {
 	@Override
 	public Integer set(int arg0, Integer arg1) {
 		// TODO Auto-generated method stub
-		Integer previousElement=array[arg0];
+		Integer previousElement = array[arg0];
 		if (arg0 < numberOfElementsInArray) {
 			array[arg0] = arg1;
-		} else if (arg0 > numberOfElementsInArray) {
+		} else if (arg0 >= numberOfElementsInArray) {
 			throw new ArrayIndexOutOfBoundsException(arg0);
 		}
 		return previousElement;
