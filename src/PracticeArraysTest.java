@@ -81,13 +81,22 @@ class PracticeArraysTest {
 		assertArrayEquals(new int[] { 1 }, PracticeArrays.copyInReverseOrder(new int[] { 1 }));
 		assertArrayEquals(new int[] { 2, 1 }, PracticeArrays.copyInReverseOrder(new int[] { 1, 2 }));
 	}
-	
+
 	@Test
 	void extractSubArrayTest() {
-		assertArrayEquals(new int[] {1}, PracticeArrays.extractSubArray(0,0,new int[] {1}));
-		assertArrayEquals(new int[] {30, 25, 40, 32}, PracticeArrays.extractSubArray(6,3,new int[] {10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60}));
-		assertArrayEquals(new int[] {30, 25, 40, 32, 31, 35}, PracticeArrays.extractSubArray(3,8,new int[] {10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60}));
+		assertArrayEquals(new int[] { 1 }, PracticeArrays.extractSubArray(0, 0, new int[] { 1 }));
+		assertArrayEquals(new int[] { 30, 25, 40, 32 },
+				PracticeArrays.extractSubArray(6, 3, new int[] { 10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60 }));
+		assertArrayEquals(new int[] { 30, 25, 40, 32, 31, 35 },
+				PracticeArrays.extractSubArray(3, 8, new int[] { 10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60 }));
 	}
-	
+
+	@Test
+	void moveOneELementCircularTest() {
+		assertArrayEquals(new int[] {1},PracticeArrays.moveOneELementCircular(new int[] {1}));
+		assertArrayEquals(new int[] {1,2},PracticeArrays.moveOneELementCircular(new int[] {2,1}));
+		assertArrayEquals(new int[] { 5, 1, 2, 3, 4 },
+				PracticeArrays.moveOneELementCircular(new int[] { 1, 2, 3, 4, 5 }));
+	}
 
 }
