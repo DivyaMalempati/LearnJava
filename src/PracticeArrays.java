@@ -6,10 +6,9 @@ public class PracticeArrays {
 		final Scanner scanner = new Scanner(System.in);
 		System.out.print("Enter the size of the array :");
 		size = scanner.nextInt();
-
 		// Dynamic memory allocation
 		final int[] array = new int[size];
-		// { 58, 24, 13, 15, 63, 9, 8, 81, 1, 78 };
+		// { 58, 24, 13, 15, 63, 9, 8, 81, 1, 78 }
 		readElements(size, scanner, array);
 		printArray(array);
 		System.out.println("Enter the number to be searched in Array :");
@@ -33,9 +32,62 @@ public class PracticeArrays {
 		int startIndex, endIndex;
 		startIndex = scanner.nextInt();
 		endIndex = scanner.nextInt();
-		int[] newArray = new int[] { 10, 12, 20, 30, 25, 40, 32, 31, 35, 50, 60 };
+		int[] newArray = new int[] { 10, 12, 20, 15 };
 		extractSubArray(startIndex, endIndex, newArray);
+		insertIntoArray(newArray);
+		newArray= new int[] {1,2,3,4,5};
+		moveOneELementCircular(newArray);
 		scanner.close();
+	}
+
+	public static int[] moveOneELementCircular(int[] newArray) {
+		int initialElement=newArray[newArray.length-1];
+		for(int shiftIndex=newArray.length-2;shiftIndex>=0;shiftIndex--) {
+			newArray[shiftIndex+1]=newArray[shiftIndex];
+			
+		}
+		newArray[0]=initialElement;
+		System.out.print("[");
+		for(int i:newArray) {
+			System.out.print(i+",");
+		}
+		System.out.print("]");
+		return newArray;
+	}
+
+	private static void insertIntoArray(int[] array) {
+		// int[] array = { 4, 8, 5, 6, 3, 2 };
+		int highestElement = Integer.MIN_VALUE, secondHighestElement = highestElement, highestElementIndex = -1;
+		for (int i = 0; i < array.length; i++) {
+			if (highestElement < array[i]) {
+				secondHighestElement = highestElement;
+				highestElement = array[i];
+				highestElementIndex = i;
+			} else if (secondHighestElement < array[i] && array[i] < highestElement) {
+				secondHighestElement = array[i];
+			}
+		}
+		int[] newArray = new int[array.length + 1];
+		for (int index = 0, newArrayIndex = 0; index < array.length; index++, newArrayIndex++) {
+			if (highestElementIndex == newArrayIndex) {
+				newArray[highestElementIndex] = secondHighestElement;
+				newArray[highestElementIndex + 1] = highestElement - secondHighestElement;
+				newArrayIndex++;
+
+			} else {
+				newArray[newArrayIndex] = array[index];
+			}
+
+		}
+		System.out.print("[");
+		for (int i = 0; i < newArray.length; i++) {
+
+			System.out.print(newArray[i] + ",");
+
+		}
+		System.out.print("]");
+		System.out.println(
+				"Highest Element is : " + highestElement + " and Second Highest ELement is : " + secondHighestElement);
 	}
 
 	static int[] extractSubArray(int startIndex, int endIndex, int[] array) {
