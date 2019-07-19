@@ -20,8 +20,30 @@ class FindUniqueNumbers {
 			printArray(array);
 			int[] uniqueArray = findUniqueNumbersWithMemory(array);
 			printArray(uniqueArray);
+			int[] uniqueArray = findUniqueNumbersWithOutMemory(array);
+			printArray(uniqueArray);
 		}
 		scanner.close();
+	}
+
+	private static int[] findUniqueNumbersWithOutMemory(int[] array) {
+		int[] uniqueArray = new int[array.length];
+		int uniqueArrayActualSize = 0;
+		for (int currentIndex = 0; currentIndex < array.length; currentIndex++) {
+			boolean isUnique = true;
+			for (int previousIndex = 0; previousIndex < currentIndex; previousIndex++) {
+				if (array[previousIndex] == array[currentIndex]) {
+					isUnique = false;
+					break;
+				}
+			}
+			if (isUnique) {
+				uniqueArray[uniqueArrayActualSize] = array[currentIndex];
+				uniqueArrayActualSize++;
+			}
+		}
+
+		return uniqueArray;
 	}
 
 	private static int[] findUniqueNumbersWithMemory(int[] array) {
@@ -29,8 +51,8 @@ class FindUniqueNumbers {
 		int uniqueArrayActualSize = 0;
 		for (int currentIndex = 0; currentIndex < array.length; currentIndex++) {
 			boolean isUnique = true;
-			for (int previousIndex = 0; previousIndex < currentIndex; previousIndex++) {
-				if (array[previousIndex] == array[currentIndex]) {
+			for (int uniqueArrayIndex = 0; uniqueArrayIndex < uniqueArrayActualSize; uniqueArrayIndex++) {
+				if (uniqueArray[uniqueArrayIndex] == array[currentIndex]) {
 					isUnique = false;
 					break;
 				}
