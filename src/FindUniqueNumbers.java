@@ -20,7 +20,7 @@ class FindUniqueNumbers {
 			printArray(array);
 			int[] uniqueArray = findUniqueNumbersWithMemory(array);
 			printArray(uniqueArray);
-			int[] uniqueArray = findUniqueNumbersWithOutMemory(array);
+			uniqueArray = findUniqueNumbersWithOutMemory(array);
 			printArray(uniqueArray);
 		}
 		scanner.close();
