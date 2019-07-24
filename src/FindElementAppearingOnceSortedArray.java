@@ -6,6 +6,12 @@ import org.junit.Test;
 
 public class FindElementAppearingOnceSortedArray {
 
+	@Test(expected=RuntimeException.class)
+	public void findElement_ZeroElement_SuccessTest() {
+		int[] array = {  };
+		findElementAppearingOnce(array);
+	}
+
 	@Test
 	public void findElement_OneElement_SuccessTest() {
 		int[] array = { 1 };
@@ -43,21 +49,16 @@ public class FindElementAppearingOnceSortedArray {
 	}
 
 	public static int findElementAppearingOnce(int[] array) {
-		System.out.println(array.length);
 		int startIndex = 0, endIndex = array.length - 1;
+		
 		if (array.length % 2 == 0) {
-			throw new RuntimeException("Expected Odd Array Size");
-		}
-		if (array.length == 1) {
-			return array[startIndex];
+			throw new RuntimeException("Odd Array Length Expected");
 		}
 		while (startIndex <= endIndex) {
 			if (startIndex == endIndex) {
 				return array[startIndex];
 			}
-			System.out.println("StartIndex" + startIndex + " EndIndex :" + endIndex);
 			int midIndex = (int) Math.floor((startIndex + endIndex) / 2);
-			System.out.println("MidIndex" + midIndex);
 			if (array[midIndex] != array[midIndex - 1] && array[midIndex] != array[midIndex + 1]) {
 				return array[midIndex];
 			}
