@@ -43,7 +43,6 @@ public class FindElementAppearingOnceSortedArray {
 	}
 
 	public static int findElementAppearingOnce(int[] array) {
-		System.out.println(array.length);
 		int startIndex = 0, endIndex = array.length - 1;
 		if (array.length % 2 == 0) {
 			throw new RuntimeException("Expected Odd Array Size");
@@ -55,9 +54,7 @@ public class FindElementAppearingOnceSortedArray {
 			if (startIndex == endIndex) {
 				return array[startIndex];
 			}
-			System.out.println("StartIndex" + startIndex + " EndIndex :" + endIndex);
 			int midIndex = (int) Math.floor((startIndex + endIndex) / 2);
-			System.out.println("MidIndex" + midIndex);
 			if (array[midIndex] != array[midIndex - 1] && array[midIndex] != array[midIndex + 1]) {
 				return array[midIndex];
 			}
