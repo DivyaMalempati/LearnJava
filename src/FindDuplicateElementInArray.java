@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.HashSet;
+
 import org.junit.Test;
 
 public class FindDuplicateElementInArray {
@@ -17,13 +19,17 @@ public class FindDuplicateElementInArray {
 
 	@Test
 	public void findDuplicate_Array_Test() {
-		int[] array = { 1, 2, 3, 1, 4 };
-		assertEquals(1, findDuplicateElementInArray(array));
-		assertEquals(1, findDuplicateElementInArray(new int[] { 1, 1 }));
-		assertEquals(2, findDuplicateElementInArray(new int[] { 1, 2, 2 }));
-		assertEquals(2, findDuplicateElementInArray(new int[] { 1, 2, 3, 2 }));
-		assertEquals(6, findDuplicateElementInArray(new int[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10, 6 }));
-		assertEquals(5, findDuplicateElementInArray(new int[] { 1, 2, 3, 4, 5, 5, 7, 8, 9, 10, 6 }));
+		assertDuplicateElements(new int[] { 1, 2, 3, 1, 4 }, 1);
+		assertDuplicateElements(new int[] { 1, 1 }, 1);
+		assertDuplicateElements(new int[] { 1, 2, 2 }, 2);
+		assertDuplicateElements(new int[] { 1, 2, 3, 2 }, 2);
+		assertDuplicateElements(new int[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10, 6 }, 6);
+		assertDuplicateElements(new int[] { 1, 2, 3, 4, 5, 5, 7, 8, 9, 10, 6 }, 5);
+	}
+
+	private void assertDuplicateElements(int[] array, int actualResult) {
+		assertEquals(actualResult, findDuplicateElementInArray(array));
+		assertEquals(actualResult, findingDuplicateElements(array));
 	}
 
 	public static int findDuplicateElementInArray(int[] array) {
@@ -63,5 +69,17 @@ public class FindDuplicateElementInArray {
 			}
 		}
 		return temp;
+	}
+
+	public int findingDuplicateElements(int[] array) {
+	HashSet<Integer> storeAndSearchArray = new HashSet<Integer>();
+		for (int index = 0; index < array.length; index++) {
+			if (!storeAndSearchArray.contains(array[index])) {
+				storeAndSearchArray.add(array[index]);
+			} else {
+				return array[index];
+			}
+		}
+		return -1;
 	}
 }
