@@ -80,7 +80,22 @@ class LinkedList implements List<Integer> {
 
 	@Override
 	public void add(int arg0, Integer arg1) {
+		if (arg0 == 0) {
+			addAtFirst(arg1);
+		}
+		LinkedListNode newNode = new LinkedListNode(arg1);
+		LinkedListNode currentNode = head;
+		int count = 0;
+		while (currentNode != null) {
 
+			if (count == arg0 - 1) {
+				newNode.next = currentNode.next;
+				currentNode.next = newNode;
+				sizeOfTheLinkedList++;
+			}
+			currentNode = currentNode.next;
+			count++;
+		}
 	}
 
 	@Override
@@ -159,14 +174,34 @@ class LinkedList implements List<Integer> {
 
 	@Override
 	public boolean remove(Object arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/**
+	 * Always remove the first element by default
+	 */
 	@Override
 	public Integer remove(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedListNode currentNode = head;
+		int elementRemoved;
+		int count = 0;
+		if (arg0 == 0) {
+			elementRemoved = currentNode.element;
+			head = currentNode.next;
+			sizeOfTheLinkedList--;
+			return elementRemoved;
+		}
+		while(currentNode != null && arg0 != 0) {
+			if (count == arg0 - 1) {
+				elementRemoved=currentNode.next.element;
+				currentNode.next = currentNode.next.next;
+				sizeOfTheLinkedList--;
+				return elementRemoved;
+			}
+			count++;
+			currentNode = currentNode.next;
+		}
+		return -1;
 	}
 
 	@Override
@@ -204,19 +239,19 @@ class LinkedList implements List<Integer> {
 
 	@Override
 	public Object[] toArray() {
-		Integer[] array= new Integer[sizeOfTheLinkedList];
-		LinkedListNode currentNode=head;
-		int index=0;
-		while(currentNode!=null) {
-			array[index++]=currentNode.element;
-			currentNode=currentNode.next;
+		Integer[] array = new Integer[sizeOfTheLinkedList];
+		LinkedListNode currentNode = head;
+		int index = 0;
+		while (currentNode != null) {
+			array[index++] = currentNode.element;
+			currentNode = currentNode.next;
 		}
 		return array;
 	}
 
 	@Override
 	public <T> T[] toArray(T[] arg0) {
-		
+
 		// TODO Auto-generated method stub
 		return null;
 	}
