@@ -1,9 +1,10 @@
 package com.divya.learnjava;
 
 import static org.junit.jupiter.api.Assertions.*;
-import com.divya.learnjava.FindSubSumArrayWithHighLowIndices.MinMaxInArrayWithSum;
 
 import org.junit.jupiter.api.Test;
+
+import com.divya.learnjava.FindSubSumArrayWithHighLowIndices.MinMaxInArrayWithSum;
 
 class FindSubSumArrayWithHighLowIndicesTest {
 
