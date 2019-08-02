@@ -25,15 +25,15 @@ class LinkedListStackMinMaxTest {
 		assertTrue(linkedList.push(20));
 		assertTrue(linkedList.push(30));
 		assertTrue(linkedList.push(40));
-		assertEquals((Integer) 20, linkedList.minStack.peek());
+		assertEquals((Integer) 20, linkedList.minValueInStack());
 		assertEquals((Integer) 40, linkedList.pop());
 		assertTrue(linkedList.push(10));
-		assertEquals((Integer) 10, linkedList.minStack.peek());
+		assertEquals((Integer) 10, linkedList.minValueInStack());
 		assertTrue(linkedList.push(50));
 		assertTrue(linkedList.push(5));
-		assertEquals((Integer) 5, linkedList.minStack.peek());
+		assertEquals((Integer) 5, linkedList.minValueInStack());
 		assertEquals((Integer) 5, linkedList.pop());
-		assertEquals((Integer) 10, linkedList.minStack.peek());
+		assertEquals((Integer) 10, linkedList.minValueInStack());
 		assertEquals(4, linkedList.size());
 	}
 
@@ -44,14 +44,42 @@ class LinkedListStackMinMaxTest {
 		assertTrue(linkedList.push(20));
 		assertTrue(linkedList.push(30));
 		assertTrue(linkedList.push(40));
-		assertEquals((Integer) 40, linkedList.maxStack.peek());
+		assertEquals((Integer) 40, linkedList.maxValueInStack());
 		assertEquals((Integer) 40, linkedList.pop());
 		assertTrue(linkedList.push(10));
-		assertEquals((Integer) 30, linkedList.maxStack.peek());
+		assertEquals((Integer) 30, linkedList.maxValueInStack());
 		assertTrue(linkedList.push(50));
 		assertTrue(linkedList.push(5));
 		assertTrue(linkedList.push(10));
-		assertEquals((Integer) 50, linkedList.maxStack.peek());
+		assertEquals((Integer) 50, linkedList.maxValueInStack());
 		assertEquals(6, linkedList.size());
+	}
+
+	@Test
+	void minMax_duplicates_Test() {
+		assertTrue(linkedList.push(1));
+		assertTrue(linkedList.push(1));
+		assertTrue(linkedList.push(1));
+		assertTrue(linkedList.push(1));
+		System.out.println("Min Size: " + linkedList.minStack.size() + "MaxStack : " + linkedList.maxStack.size());
+		assertEquals((Integer) 1, linkedList.minValueInStack());
+		assertEquals((Integer) 1, linkedList.maxValueInStack());
+		assertEquals((Integer) 1, linkedList.pop());
+		System.out.println("Min Size: " + linkedList.minStack.size() + "MaxStack : " + linkedList.maxStack.size());
+		assertEquals((Integer) 1, linkedList.minValueInStack());
+		assertEquals((Integer) 1, linkedList.maxValueInStack());
+		assertEquals((Integer) 1, linkedList.pop());
+		System.out.println("Min Size: " + linkedList.minStack.size() + "MaxStack : " + linkedList.maxStack.size());
+		assertEquals((Integer) 1, linkedList.minValueInStack());
+		assertEquals((Integer) 1, linkedList.maxValueInStack());
+		assertEquals((Integer) 1, linkedList.pop());
+		System.out.println("Min Size: " + linkedList.minStack.size() + "MaxStack : " + linkedList.maxStack.size());
+		assertEquals((Integer) 1, linkedList.minValueInStack());
+		assertEquals((Integer) 1, linkedList.maxValueInStack());
+		assertEquals((Integer) 1, linkedList.pop());
+		System.out.println("Min Size: " + linkedList.minStack.size() + "MaxStack : " + linkedList.maxStack.size());
+		assertEquals((Integer) 1, linkedList.minValueInStack());
+		assertEquals((Integer) 1, linkedList.maxValueInStack());
+
 	}
 }

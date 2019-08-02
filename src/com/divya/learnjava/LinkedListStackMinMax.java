@@ -1,76 +1,133 @@
 package com.divya.learnjava;
 
-import com.divya.learnjava.LinkedListStack;
-
 public class LinkedListStackMinMax extends LinkedListStack<Integer> {
-	LinkedListStack<Integer> minStack;
-	LinkedListStack<Integer> maxStack;
+	LinkedListStack<ElementInfo> minStack;
+	LinkedListStack<ElementInfo> maxStack;
 
 	public LinkedListStackMinMax() {
 		minStack = new LinkedListStack<>();
 		maxStack = new LinkedListStack<>();
 	}
 
+	/**
+	 * A Class to keep track of duplicate elements count whenever an element is
+	 * inserted in stack
+	 * 
+	 * @author DivyaMalempati
+	 *
+	 */
 	static class ElementInfo {
-		Integer element;
+		private Integer element;
 		int count;
+
+		public ElementInfo(Integer element) {
+			this.element = element;
+			count = 0;
+		}
 
 	}
 
+	/**
+	 * <br>
+	 * Time Complexity O(1)<br>
+	 */
 	@Override
 	public boolean push(Integer element) {
-
 		if (isEmpty()) {
-			minStack.push(element);
-			maxStack.push(element);
+			minStack.push(new ElementInfo(element));
+			minStack.peek().count += 1;
+			maxStack.push(new ElementInfo(element));
+			maxStack.peek().count += 1;
 		} else {
-			if (element < minStack.peek()) {
-				minStack.push(element);
-			} else if (element == minValueInStackPeek()) {
-				minStack.pop();
-				minStack.push(element);
+			if (element < minValueInStack()) {
+				minStack.push(new ElementInfo(element));
+				minStack.peek().count += 1;
+			} else if (element == minValueInStack()) {
+				minStack.peek().count += 1;
 			}
-			if (element > maxStack.peek()) {
-				maxStack.push(element);
-			} else if (element == maxStack.peek()) {
-				maxStack.pop();
-				maxStack.push(element);
+			if (element > maxValueInStack()) {
+				maxStack.push(new ElementInfo(element));
+				maxStack.peek().count += 1;
+			} else if (element == maxValueInStack()) {
+				maxStack.peek().count += 1;
 			}
 		}
 		return super.push(element);
 	}
 
+	/**
+	 * This method returns the Maximum value at the top of the Max stack <br>
+	 * Time Complexity O(1)<br>
+	 * 
+	 * @return Element
+	 * 
+	 */
+	protected Integer maxValueInStack() {
+		return maxStack.peek().element;
+	}
+
+	/**
+	 * This method returns the Minimum value at the top of the Minimum stack<br>
+	 * Time Complexity O(1) <br>
+	 * 
+	 * @return Element
+	 */
+	protected Integer minValueInStack() {
+		return minStack.peek().element;
+	}
+
+	/**
+	 * Always Delete Element at First from Stack.<br>
+	 * Time Complexity O(1) <br>
+	 * 
+	 * @return Element
+	 */
 	@Override
 	public Integer pop() {
-		int elementDeleted = super.pop();
+		Integer elementDeleted = super.pop();
 		if (!isEmpty()) {
-			if (elementDeleted == minValueInStackPeek()) {
-				minStack.pop();
-			} else if (elementDeleted == maxValueInStackPeek()) {
-				maxStack.pop();
+			if (elementDeleted == minValueInStack()) {
+				minStack.peek().count -= 1;
+				if (minStack.peek().count == 0) {
+					minStack.pop();
+				}
+			}
+			if (elementDeleted == maxValueInStack()) {
+				maxStack.peek().count -= 1;
+				if (maxStack.peek().count == 0) {
+					maxStack.pop();
+				}
 			}
 		}
 		return elementDeleted;
 	}
 
-	private Integer minValueInStackPeek() {
-		return minStack.peek();
-	}
-
-	private Integer maxValueInStackPeek() {
-		return maxStack.peek();
-	}
-
+	/**
+	 * Peek Is a function to see the top most element in the stack<br>
+	 * Time Complexity is O(1) <br>
+	 * 
+	 * @return Element
+	 */
 	@Override
 	public Integer peek() {
 		return super.peek();
 	}
 
+	/**
+	 * Checks If the Stack is Empty
+	 * 
+	 * @return true/false
+	 */
 	@Override
 	public boolean isEmpty() {
 		return super.isEmpty();
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return Size of the Stack
+	 */
 	@Override
 	public int size() {
 		return super.size();
