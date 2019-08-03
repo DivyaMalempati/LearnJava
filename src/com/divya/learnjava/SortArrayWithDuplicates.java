@@ -1,5 +1,3 @@
-//delete this code
-
 package com.divya.learnjava;
 
 import static org.junit.Assert.assertArrayEquals;
