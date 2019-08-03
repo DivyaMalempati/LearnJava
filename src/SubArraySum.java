@@ -1,4 +1,6 @@
+import static org.junit.Assert.assertEquals;
 
+import org.junit.jupiter.api.Test;
 
 public class SubArraySum {
 	public static int subArraySum(int[] nums, int k) {
@@ -9,19 +11,17 @@ public class SubArraySum {
 				sum += nums[nextIndex];
 				if (sum == k) {
 					count++;
-					//System.out.println("Start"+index+"end"+nextIndex);
 				}
 			}
 		}
 		return count;
 	}
 
-	public static void main(String[] args) {
-		System.out.println("Count : " + subArraySum(new int[] { 2, 8, 5, 5, -1, 4, 6 }, 10));
-		System.out.println("Count : " + subArraySum(new int[] { 1, 1, 1 }, 2));
-		System.out.println("Count : " + subArraySum(new int[] { 0, 0, 0 }, 0));
+	@Test
+	public void subSum_Test() {
+		assertEquals(3, subArraySum(new int[] { 2, 8, 5, 5, -1, 4, 6 }, 10));
+		assertEquals(2, subArraySum(new int[] { 1, 1, 1 }, 2));
+		assertEquals(6, subArraySum(new int[] { 0, 0, 0 }, 0));
+		assertEquals(4, subArraySum(new int[] { 1, -1, 1, -1 }, 0));
 	}
 }
-
-
-
