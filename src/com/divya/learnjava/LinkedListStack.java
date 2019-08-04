@@ -1,7 +1,7 @@
 package com.divya.learnjava;
 
-public class LinkedListStack {
-	private StackNode top;
+public class LinkedListStack<T> {
+	private StackNode<T> top;
 	private int sizeOfTheStack;
 
 	public LinkedListStack() {
@@ -9,11 +9,11 @@ public class LinkedListStack {
 		sizeOfTheStack = 0;
 	}
 
-	private static class StackNode {
-		StackNode next;
-		Integer element;
+	private static class StackNode<T> {
+		StackNode<T> next;
+		T element;
 
-		public StackNode(Integer element) {
+		public StackNode(T element) {
 			this.element = element;
 			this.next = null;
 		}
@@ -27,15 +27,12 @@ public class LinkedListStack {
 	 * @param element
 	 * @return true/false after insertion
 	 */
-	public boolean push(Integer element) {
-		StackNode newNode = new StackNode(element);
-		if (top != null) {
+	public boolean push(T element) {
+		StackNode<T> newNode = new StackNode<T>(element);
 			newNode.next = top;
 			top = newNode;
 			sizeOfTheStack++;
 			return true;
-		}
-		return false;
 	}
 
 	/**
@@ -43,12 +40,12 @@ public class LinkedListStack {
 	 * 
 	 * Time Complexity O(1)
 	 * 
-	 * @return Deleted Element
+	 * @return The Deleted Element
 	 * 
 	 */
-	public Integer pop() {
-		StackNode currentNode = top;
-		Integer elementReturned = -1;
+	public T pop() {
+		StackNode<T> currentNode = top;
+		T elementReturned = null;
 		if (top != null) {
 			elementReturned = currentNode.element;
 			top = currentNode.next;
@@ -62,21 +59,21 @@ public class LinkedListStack {
 	 * 
 	 * Time Complexity is O(1)
 	 * 
-	 * @return The Element
+	 * @return The Element On Top of the stack
 	 */
-	public Integer peek() {
-		StackNode currentNode = top;
+	public T peek() {
+		StackNode<T> currentNode = top;
 		if (top != null) {
 			return currentNode.element;
 		}
-		return -1;
+		return null;
 	}
 
 	public boolean isEmpty() {
 		return (top == null) ? true : false;
 	}
-	
-	public Integer size() {
+
+	public int size() {
 		return sizeOfTheStack;
 	}
 }
