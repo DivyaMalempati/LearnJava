@@ -1,3 +1,5 @@
+package com.divya.learnjava;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -12,13 +14,54 @@ class LinkedList implements List<Integer> {
 		sizeOfTheLinkedList = 0;
 	}
 
-	private static class LinkedListNode {
-		LinkedListNode next;
-		Integer element;
+	LinkedList(Integer... integers) {
+		this();
+		for (Integer integer : integers) {
+			add(integer);
+		}
+	}
+
+	static class LinkedListNode {
+		protected LinkedListNode next;
+		protected Integer element;
 
 		LinkedListNode(Integer element) {
 			this.element = element;
 			next = null;
+		}
+
+		public Object[] toArray() {
+			Integer[] array = new Integer[getSize()];
+			LinkedListNode currentNode = this;
+			int index = 0;
+			while (currentNode != null) {
+				array[index++] = currentNode.element;
+				currentNode = currentNode.next;
+			}
+			return array;
+		}
+
+		private int getSize() {
+			LinkedListNode tempNode = next;
+			int count = 1;
+			while (tempNode != null) {
+				count++;
+				tempNode = tempNode.next;
+			}
+			return count;
+		}
+
+		public void printList() {
+			LinkedListNode currentNode = this;
+			System.out.print("[");
+			while (currentNode != null) {
+				System.out.print(currentNode.element);
+				if (currentNode.next != null) {
+					System.out.print(",");
+				}
+				currentNode = currentNode.next;
+			}
+			System.out.println("]");
 		}
 	}
 
@@ -191,9 +234,9 @@ class LinkedList implements List<Integer> {
 			sizeOfTheLinkedList--;
 			return elementRemoved;
 		}
-		while(currentNode != null && arg0 != 0) {
+		while (currentNode != null && arg0 != 0) {
 			if (count == arg0 - 1) {
-				elementRemoved=currentNode.next.element;
+				elementRemoved = currentNode.next.element;
 				currentNode.next = currentNode.next.next;
 				sizeOfTheLinkedList--;
 				return elementRemoved;
@@ -270,5 +313,9 @@ class LinkedList implements List<Integer> {
 		}
 		stringBuilder.append("]");
 		return stringBuilder.toString();
+	}
+
+	protected LinkedListNode getHead() {
+		return head;
 	}
 }
