@@ -22,7 +22,7 @@ public class LinkedListStackMinMax extends LinkedListStack<Integer> {
 
 		public ElementInfo(Integer element) {
 			this.element = element;
-			count = 0;
+			count = 1;
 		}
 
 	}
@@ -35,19 +35,15 @@ public class LinkedListStackMinMax extends LinkedListStack<Integer> {
 	public boolean push(Integer element) {
 		if (isEmpty()) {
 			minStack.push(new ElementInfo(element));
-			minStack.peek().count += 1;
 			maxStack.push(new ElementInfo(element));
-			maxStack.peek().count += 1;
 		} else {
 			if (element < minValueInStack()) {
 				minStack.push(new ElementInfo(element));
-				minStack.peek().count += 1;
 			} else if (element == minValueInStack()) {
 				minStack.peek().count += 1;
 			}
 			if (element > maxValueInStack()) {
 				maxStack.push(new ElementInfo(element));
-				maxStack.peek().count += 1;
 			} else if (element == maxValueInStack()) {
 				maxStack.peek().count += 1;
 			}
@@ -62,7 +58,7 @@ public class LinkedListStackMinMax extends LinkedListStack<Integer> {
 	 * @return Element
 	 * 
 	 */
-	protected Integer maxValueInStack() {
+	public Integer maxValueInStack() {
 		return maxStack.peek().element;
 	}
 
@@ -72,7 +68,7 @@ public class LinkedListStackMinMax extends LinkedListStack<Integer> {
 	 * 
 	 * @return Element
 	 */
-	protected Integer minValueInStack() {
+	public Integer minValueInStack() {
 		return minStack.peek().element;
 	}
 
