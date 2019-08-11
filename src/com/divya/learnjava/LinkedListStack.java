@@ -1,6 +1,6 @@
 package com.divya.learnjava;
 
-public class LinkedListStack<T> {
+public class LinkedListStack<T> implements StackInterface<T> {
 	private StackNode<T> top;
 	private int sizeOfTheStack;
 
@@ -27,12 +27,12 @@ public class LinkedListStack<T> {
 	 * @param element
 	 * @return true/false after insertion
 	 */
-	public boolean push(T element) {
+	@Override
+	public void push(T element) {
 		StackNode<T> newNode = new StackNode<T>(element);
-			newNode.next = top;
-			top = newNode;
-			sizeOfTheStack++;
-			return true;
+		newNode.next = top;
+		top = newNode;
+		sizeOfTheStack++;
 	}
 
 	/**
@@ -43,14 +43,15 @@ public class LinkedListStack<T> {
 	 * @return The Deleted Element
 	 * 
 	 */
+	@Override
 	public T pop() {
-		StackNode<T> currentNode = top;
-		T elementReturned = null;
-		if (top != null) {
-			elementReturned = currentNode.element;
-			top = currentNode.next;
-			sizeOfTheStack--;
+		if (isEmpty()) {
+			throw new RuntimeException("Stack is Empty");
 		}
+		T elementReturned = null;
+		elementReturned = top.element;
+		top = top.next;
+		sizeOfTheStack--;
 		return elementReturned;
 	}
 
@@ -61,6 +62,7 @@ public class LinkedListStack<T> {
 	 * 
 	 * @return The Element On Top of the stack
 	 */
+	@Override
 	public T peek() {
 		StackNode<T> currentNode = top;
 		if (top != null) {
@@ -69,10 +71,12 @@ public class LinkedListStack<T> {
 		return null;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return (top == null) ? true : false;
 	}
 
+	@Override
 	public int size() {
 		return sizeOfTheStack;
 	}
