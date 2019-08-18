@@ -1,6 +1,7 @@
 package com.divya.learnjava;
 
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNull;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +31,7 @@ class ReverseALinkedList {
 
 	@Test
 	public void reverseLinkedListTest() {
-		assertArrayEquals(new Integer[] {}, ReverseALinkedList.reverseLinkedList(new LinkedList().getHead()).toArray());
+		assertNull(ReverseALinkedList.reverseLinkedList(new LinkedList().getHead()));
 		assertArrayEquals(new Integer[] { 1 },
 				ReverseALinkedList.reverseLinkedList(new LinkedList(1).getHead()).toArray());
 		assertArrayEquals(new Integer[] { 5, 4, 3, 2, 1 },
