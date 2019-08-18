@@ -17,12 +17,8 @@ public class AddToArrayFormInteger {
 		BigInteger KBI = new BigInteger("" + K);
 		number = number.add(KBI);
 		LinkedList<Integer> list = new LinkedList<>();
-		while (!number.equals(BigInteger.valueOf(0))) {
-			list.addFirst(number.mod(BigInteger.valueOf(10)).intValue());
-			number = number.divide(BigInteger.valueOf(10));
-		}
-		if(list.isEmpty()) {
-			list.add(0);
+		for (char digit : number.toString().toCharArray()) {
+			list.add(Integer.valueOf("" + digit));
 		}
 		return list;
 	}
