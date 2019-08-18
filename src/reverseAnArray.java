@@ -9,11 +9,6 @@ public class reverseAnArray {
 			array[startIndex] = array[lastIndex];
 			array[lastIndex] = temp;
 		}
-		System.out.print("[");
-		for (int i : array) {
-			System.out.print(i + ",");
-		}
-		System.out.print("]");
 		return array;
 	}
 

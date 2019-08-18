@@ -1,6 +1,7 @@
 package com.divya.learnjava.stack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Stack;
@@ -25,25 +26,20 @@ public class ReverseAStack {
 				}
 				correctELementCount++;
 			}
-			return stack;
-		} else {
-			throw new RuntimeException("Stack is Empty");
 		}
+		return stack;
 	}
 
 	@Test
 	public void reverseTest() {
 		Stack<Integer> stack = new Stack<>();
-		assertThrows(RuntimeException.class, () -> {
-			reverseStack(stack);
-		});
+		assertTrue(reverseStack(stack).isEmpty());
 		stack.push(1);
 		stack.push(2);
 		Stack<Integer> reverseStack = new Stack<>();
 		reverseStack.push(2);
 		reverseStack.push(1);
 		assertEquals(reverseStack, reverseStack(stack));
-
 	}
 
 }
