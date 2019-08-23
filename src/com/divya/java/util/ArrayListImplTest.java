@@ -1,4 +1,5 @@
 package com.divya.java.util;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,6 +32,7 @@ class ArrayListImplTest {
 		array.add(90);
 		array.add(100);
 		array.add(110);
+		assertEquals((Integer) 10, array.set(0, 1));
 		assertEquals(11, array.size());
 		assertEquals(20, array.arraySize());
 		assertEquals((Integer) 110, array.remove());
@@ -38,7 +40,7 @@ class ArrayListImplTest {
 		assertEquals((Integer) 100, array.remove());
 		assertEquals(9, array.size());
 		assertEquals(10, array.arraySize());
-		assertEquals((Integer) 10, array.remove(0));
+		assertEquals((Integer) 1, array.remove(0));
 		assertEquals(8, array.size());
 		assertEquals((Integer) 90, array.remove());
 		assertEquals((Integer) 80, array.remove());
@@ -54,5 +56,15 @@ class ArrayListImplTest {
 		assertThrows(RuntimeException.class, () -> {
 			array.remove();
 		});
+	}
+
+	@Test
+	public void arrayListImpl_addAtIndex_Test() {
+		array.add(1);
+		array.add(2);
+		array.add(3);
+		array.add(4);
+		array.add(0, 10);
+		assertEquals(5, array.size());
 	}
 }
