@@ -5,22 +5,23 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class SetImpl implements Set<Integer> {
+	private ArrayListImpl array = new ArrayListImpl();
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return array.size();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return array.isEmpty();
 	}
 
 	@Override
-	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
+	public boolean contains(Object element) {
+		if (array.contains(element)) {
+			return true;
+		}
 		return false;
 	}
 
@@ -32,25 +33,49 @@ public class SetImpl implements Set<Integer> {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		return array.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public boolean add(Integer e) {
-		// TODO Auto-generated method stub
+		if (!contains(e)) {
+			int index = findRightLocation(e);
+			if (index == -1) {
+				array.add(e);
+			} else {
+				array.add(index, e);
+			}
+			return true;
+		}
 		return false;
+	}
+
+	private int findRightLocation(Integer e) {
+		for (int index = 0; index < size(); index++) {
+			if (array.get(index) >= e) {
+				return index;
+			}
+		}
+		return -1;
+	}
+
+	private void sortedSet(Integer e) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
+		if (contains(o)) {
+			array.remove(o);
+			return true;
+		}
 		return false;
 	}
 
@@ -84,4 +109,8 @@ public class SetImpl implements Set<Integer> {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return array.toString();
+	}
 }
