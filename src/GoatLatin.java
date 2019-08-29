@@ -49,6 +49,10 @@ public class GoatLatin {
 
 	@Test
 	public void goatLatinTest() {
-		assertEquals("Imaa peaksmaaa oatGmaaaa atinLmaaaaa", goatLatinOfWord("I speak Goat Latin"));
+		assertEquals("imaa peaksmaaa oatGmaaaa atinLmaaaaa", goatLatinOfWord("i speak Goat Latin"));
+		assertEquals("Imaa Eatmaaa alonemaaaa", goatLatinOfWord("I Eat alone"));
+		assertEquals("omaa Eatmaaa Alonemaaaa", goatLatinOfWord("o Eat Alone"));
+		assertEquals("Umaa Eatmaaa Onemaaaa", goatLatinOfWord("U Eat One"));
+		assertEquals("umaa eatmaaa Onemaaaa", goatLatinOfWord("u eat One"));
 	}
 }
